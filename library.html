@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Library Admin Panel</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f6f9;padding:20px;margin:0}
+h2,h3{margin:10px 0}
+input,button,select{padding:6px;margin:4px}
+#msg{color:red}
+.dashboard{display:flex;gap:15px;margin-top:15px;flex-wrap:wrap}
+.card{flex:1 1 180px;background:#fff;padding:12px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);text-align:center}
+.card h4{margin:5px;color:#555}
+.card .number{font-size:24px;font-weight:bold;color:#007bff}
+table{border-collapse:collapse;width:100%;margin-top:10px}
+th,td{border:1px solid #ccc;padding:6px;text-align:left}
+th{background:#007bff;color:#fff}
+#student,#book,#history,#pending{margin-top:10px}
+button{cursor:pointer}
+</style>
+</head>
+<body>
+
+
+
+<center>
+<h2>GG College Library Dashboard</h2>
+<div id="loginBox" style="background-color: #007bff; width: 600px;border-radius: 20px;"> <br>
+  <br><br>
+<h3>Admin Login</h3>
+<input id="user" placeholder="UserID"> <br>
+<input id="pass" type="password" placeholder="Password"> <br>
+<button onclick="login()">Login</button>
+<div id="msg"></div>
+<br><br>
+
+<h3>Developer : 2K Solutions , Jamkhandi</h3> <br>
+</div>
+</center>
+
+
+<div id="admin" style="display:none">
+
+<!-- DASHBOARD CARDS -->
+<div class="dashboard">
+<div class="card"><h4>Total Students</h4><div class="number" id="totalStudents">0</div></div>
+<div class="card"><h4>Total Books</h4><div class="number" id="totalBooks">0</div></div>
+<div class="card"><h4>Issued Books</h4><div class="number" id="issuedBooks">0</div></div>
+<div class="card"><h4>Pending Books</h4><div class="number" id="pendingBooks">0</div></div>
+</div>
+
+<!-- STUDENT LOOKUP -->
+<h3>Fetch Student Details</h3>
+<input id="sats" placeholder="Enter SATS No">
+<button onclick="fetchStudent()">Fetch Student</button>
+<div id="student"></div>
+<div id="history"></div>
+
+<!-- BOOK LOOKUP -->
+<h3>Fetch Book Details</h3>
+<input id="bookNo" placeholder="Enter Book No">
+<button onclick="fetchBook()">Fetch Book</button>
+<div id="book"></div>
+<button onclick="issueBook()">Issue Book</button>
+
+<!-- PENDING LIST DOWNLOAD -->
+<h3>Pending Books</h3>
+<button onclick="downloadPending()">Download Pending List</button>
+<div id="pending"></div>
+
+<script>
+const APP_URL="https://script.google.com/macros/s/AKfycbzRALt9tAUyDTf_oj37UFDEYvisuql7xJmakgXvGuolUnnchCZtO1mfAUT_xmf4T4UG/exec"; // Replace
+
+async function api(action,params={}){ 
+  const q=new URLSearchParams({action,...params});
+  const r=await fetch(APP_URL+"?"+q.toString());
+  return r.json();
+}
+
+function showMsg(txt){document.getElementById("msg").innerText=txt; setTimeout(()=>document.getElementById("msg").innerText="",3000);}
+
+let currentStudent=null, currentBook=null;
+
+async function login(){
+  const u=document.getElementById("user").value.trim();
+  const p=document.getElementById("pass").value.trim();
+  if(!u||!p) return showMsg("Enter credentials");
+  const res=await api("login",{user:u,pass:p});
+  if(res.ok){
+    document.getElementById("loginBox").style.display="none";
+    document.getElementById("admin").style.display="block";
+    loadDashboard();
+    loadPending();
+  }else showMsg(res.error||"Login failed");
+}
+
+async function loadDashboard(){
+  const res=await api("getDashboard");
+  document.getElementById("totalStudents").innerText=res.totalStudents;
+  document.getElementById("totalBooks").innerText=res.totalBooks;
+  document.getElementById("issuedBooks").innerText=res.issuedBooks;
+  document.getElementById("pendingBooks").innerText=res.pendingBooks;
+}
+
+async function fetchStudent(){
+  const sats=document.getElementById("sats").value.trim();
+  if(!sats) return showMsg("Enter SATS No");
+  const res=await api("getStudent",{sats});
+  if(res.error){ showMsg(res.error); document.getElementById("student").innerHTML=""; document.getElementById("history").innerHTML=""; currentStudent=null; return;}
+  currentStudent=sats;
+  document.getElementById("student").innerHTML=`<b>Name:</b> ${res.student.name} &nbsp; | &nbsp; <b>Class:</b> ${res.student.class} &nbsp; | &nbsp; <b>SATS:</b> ${res.student.sats}`;
+  if(res.history.length){
+    let html="<table><tr><th>Book No</th><th>Title</th><th>Status</th></tr>";
+    res.history.forEach(h=>{ html+=`<tr><td>${h.bookNo}</td><td>${h.title}</td><td><select onchange="updateStatus(${h.row},this.value)"><option ${h.status=="Pending"?"selected":""}>Pending</option><option ${h.status=="Returned"?"selected":""}>Returned</option></select></td></tr>`; });
+    html+="</table>"; document.getElementById("history").innerHTML=html;
+  }else document.getElementById("history").innerHTML="<i>No book history</i>";
+  loadDashboard();
+  loadPending();
+}
+
+async function fetchBook(){
+  const bookNo=document.getElementById("bookNo").value.trim();
+  if(!bookNo) return showMsg("Enter Book No");
+  const res=await api("getBook",{bookNo});
+  if(res.error){ showMsg(res.error); document.getElementById("book").innerHTML=""; currentBook=null; return;}
+  currentBook=bookNo;
+  document.getElementById("book").innerHTML=`<b>Book No:</b> ${res.book.no} &nbsp; | &nbsp; <b>Title:</b> ${res.book.title} &nbsp; | &nbsp; <b>Author:</b> ${res.book.author}`;
+}
+
+async function issueBook(){
+  if(!currentStudent) return showMsg("Fetch student first");
+  if(!currentBook) return showMsg("Fetch book first");
+  const res=await api("issueBook",{sats:currentStudent,bookNo:currentBook});
+  if(res.error) showMsg(res.error); else { showMsg("Book issued"); fetchStudent(); document.getElementById("book").innerHTML=""; currentBook=null;}
+}
+
+async function updateStatus(row,status){
+  await api("updateStatus",{row,status});
+  showMsg("Status updated");
+  fetchStudent();
+}
+
+async function loadPending(){
+  const list=await api("getPendingList");
+  if(list.length===0){ document.getElementById("pending").innerHTML="<i>No pending books</i>"; return;}
+  let html="<table><tr><th>SATS No</th><th>Name</th><th>Book No</th><th>Book Title</th><th>Date Taken</th></tr>";
+  list.forEach(r=>{ html+=`<tr><td>${r.satsNo}</td><td>${r.studentName}</td><td>${r.bookNo}</td><td>${r.bookTitle}</td><td>${r.dateTaken}</td></tr>`; });
+  html+="</table>"; document.getElementById("pending").innerHTML=html;
+}
+
+async function downloadPending(){
+  const list=await api("getPendingList");
+  if(list.length===0){ showMsg("No pending books"); return;}
+  let csv="SATS No,Student Name,Book No,Book Title,Date Taken\n";
+  list.forEach(r=>{ csv+=`${r.satsNo},${r.studentName},${r.bookNo},${r.bookTitle},${r.dateTaken}\n`; });
+  const blob=new Blob([csv],{type:"text/csv"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url; a.download="pending_books.csv"; a.click(); URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Government Girls P.U. College, Jamkhandi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      color: #333;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-brand {
+      font-weight: 700;
+      color: #003366 !important;
+    }
+    .navbar-brand span {
+      color: #e91e63;
+    }
+    .nav-link {
+      color: #003366 !important;
+      font-weight: 500;
+    }
+    .nav-link:hover {
+      color: #e91e63 !important;
+    }
+
+    /* Carousel */
+    .carousel-item img {
+      height: 300px;
+      object-fit: cover;
+      filter: brightness(0.75);
+    }
+    .carousel-caption {
+      bottom: 180px;
+    }
+    .carousel-caption h1 {
+        text-align: center;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #251d1d;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+    }
+    .carousel-caption p {
+      color: #f1f1f1;
+      font-size: 1.1rem;
+    }
+
+    /* Section Titles */
+    section h2 {
+      color: #003366;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    /* About */
+    #about {
+      padding: 80px 10%;
+      background: #fff;
+    }
+
+    /* Courses */
+    #courses {
+      background-image: url('back_courses.jpeg');
+      padding: 80px 10%;
+    }
+    .course-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 30px;
+      transition: transform 0.3s ease;
+    }
+    .course-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Leadership */
+    #leadership {
+      padding: 80px 10%;
+      background: #fff;
+    }
+    .leader {
+      text-align: center;
+      padding: 30px;
+    }
+    .leader img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid #e91e63;
+      margin-bottom: 20px;
+      object-fit: cover;
+    }
+    .leader h4 {
+      color: #003366;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .leader h5 {
+      color: #e91e63;
+      margin-bottom: 15px;
+    }
+
+    /* Contact */
+    #contact {
+      padding: 80px 10%;
+      background: #f9f9f9;
+    }
+
+    /* Footer */
+    footer {
+      background-image: url('back_courses.jpeg');
+      color: #fff;
+      padding: 30px 10%;
+      text-align: center;
+    }
+    footer p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    footer .developer {
+      color: #e91e63;
+      font-weight: 600;
+    }
+    footer .client {
+      color: #ffc107;
+      font-weight: 600;
+    }
+
+    /* Animation on Scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid px-5">
+      <a class="navbar-brand" href="#">Govt. Girls P.U. College <span>Jamkhandi</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="#leadership">Leadership</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CAROUSEL -->
+  <div id="home" class="carousel slide" data-bs-ride="carousel" style="margin-top:70px;">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="caro1.jpeg" class="d-block h-500 w-100" alt="College Campus">
+        <div class="carousel-caption">
+          <h1>Welcome to Government Girls P.U. College</h1>
+          <p>Empowering young women through quality education in Arts, Commerce & Science.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="caro2.jpeg" class="d-block w-100" alt="Library">
+        <div class="carousel-caption">
+          <h1>Committed to Academic Excellence</h1>
+          <p>Building confidence and leadership among students of Jamkhandi.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="caro3.jpeg" class="d-block w-100" alt="Students">
+        <div class="carousel-caption">
+          <h1>Knowledge, Discipline, Empowerment</h1>
+          <p>Shaping the future of young women for a brighter tomorrow.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#home" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#home" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+  <br>
+
+  <section style=" border-radius: 8px; margin: 20px auto; width: 90%; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+  <marquee behavior="scroll" direction="left" scrollamount="6" 
+           style="color: #332d2d; 
+                  font-size: 1.3em; 
+                  font-weight: bolder; 
+                  letter-spacing: 1px; 
+                  font-family: 'Segoe UI', sans-serif;">
+<a href="https://docs.google.com/document/d/19B3Wn2KnkXq9_H64j0Y7nNjR6t-MK87165pz2hvuKJw/edit?usp=sharing" style="text-decoration: none;">     -------------Click Here for the College Updates-------------
+</a>
+</marquee>
+</section>
+
+ 
+  <br>
+  <section id="college-stats" style="padding: 60px 0; background-image: url('back_courses.jpeg');background-repeat: no-repeat;background-size: cover; text-align: center;">
+  <h2 style="font-size: 2em; color:white; margin-bottom: 40px;">College Overview</h2>
+
+  <!-- First Row -->
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-bottom: 40px;">
+    <div style="background-color: #ffffff; width: 220px; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+      <div style="font-size: 2.5em; font-weight: bold; color: #007bff;">34</div>
+      <div style="font-size: 1.1em; color: #555;">Teaching Faculty</div>
+    </div>
+
+    <div style="background-color: #ffffff; width: 220px; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+      <div style="font-size: 2.5em; font-weight: bold; color: #28a745;">06</div>
+      <div style="font-size: 1.1em; color: #555;">Non-Teaching Faculty</div>
+    </div>
+
+    <div style="background-color: #ffffff; width: 220px; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+      <div style="font-size: 2.5em; font-weight: bold; color: #dc3545;">1544</div>
+      <div style="font-size: 1.1em; color: #555;">Total Students</div>
+    </div>
+  </div>
+
+  <!-- Second Row -->
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px;">
+    <div style="background-color: #ffffff; width: 220px; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+      <div style="font-size: 2.5em; font-weight: bold; color: #17a2b8;">248</div>
+      <div style="font-size: 1.1em; color: #555;">Science Students</div>
+    </div>
+
+    <div style="background-color: #ffffff; width: 220px; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+      <div style="font-size: 2.5em; font-weight: bold; color: #ffc107;">286</div>
+      <div style="font-size: 1.1em; color: #555;">Commerce Students</div>
+    </div>
+
+    <div style="background-color: #ffffff; width: 220px; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+      <div style="font-size: 2.5em; font-weight: bold; color: #6f42c1;">1070</div>
+      <div style="font-size: 1.1em; color: #555;">Arts Students</div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- ABOUT -->
+  <section id="about" class="fade-in">
+    <div class="text-center">
+      <h2>About the College</h2>
+      <p>
+        Government Girls P.U. College, Jamkhandi is a premier institution dedicated to the empowerment of women through education.
+        Offering Arts, Commerce, and Science streams, the college strives to develop academic excellence, moral values, and social responsibility among students.
+      </p>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section id="courses" class="fade-in">
+    <div class="text-center mb-5">
+      <h2 style="color: white;">Courses Offered</h2>
+      <p style="color: white;">We provide a wide range of subjects under Arts, Commerce, and Science streams to help students pursue their career goals.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="course-card">
+          <h4>Arts Stream</h4>
+          <p>Subjects include History, Political Science, Sociology, Economics, and Kannada with other Arts Skills</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="course-card">
+          <h4>Commerce Stream</h4>
+          <p>Subjects include Accountancy, Business Studies, Economics, and Statistics .</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="course-card">
+          <h4>Science Stream</h4>
+          <p>Subjects include Physics, Chemistry, Biology, and Mathematics to strengthen analytical and technical skills.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section id="leadership" class="fade-in">
+    <div class="text-center">
+      <h2>Our Leadership</h2>
+      <p>Meet the visionaries guiding our institution towards excellence and empowerment.</p>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-6 leader">
+        <img src="caro2.jpeg" alt="Principal">
+        <h4>Shree .S R Nayakodi</h4>
+        <h5>Principal</h5>
+        <p>“Our mission is to nurture disciplined, confident, and socially responsible young women through value-based education.”</p>
+      </div>
+      <div class="col-md-6 leader">
+        <img src="chairman.jpeg" alt="Chairperson">
+        <h4>Shree Girmallapa Hanchinal</h4>
+        <h5>Chairperson, College Development Committee</h5>
+        <p>“We aim to foster innovation and academic excellence while preserving the cultural and moral ethos of our students.”</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+<section id="contact" class="fade-in" style="padding: 60px 0; background-image: url('back_courses.jpeg');">
+  <div class="text-center">
+    <h2 style="font-size: 2em; color:white; margin-bottom: 20px;">Contact Us</h2>
+    <p style="font-size: 1.1em; color: white; margin-bottom: 10px;">
+      📍 Dr. Rajkumar Road, Beside Bus Stand, Jamkhandi - 587301, Karnataka
+    </p>
+    <p style="font-size: 1.1em; color: white; margin-bottom: 20px;">
+      📞 08353221969 | ✉️ <a href="mailto:govt.ggpujkd@gmail.com" style="color: white; text-decoration: none;">govt.ggpujkd@gmail.com</a>
+    </p>
+
+    <!-- Google Map Embed -->
+    <div style="display: flex; justify-content: center;">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.311746301848!2d75.2835954!3d16.5068531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc73c4918b6649b%3A0xd2f2f6e3a37d8b00!2sGirls%20Govt.%20PU%20College!5e0!3m2!1sen!2sin!4v1730809000000!5m2!1sen!2sin" 
+        width="90%" 
+        height="300" 
+        style="border:0; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);" 
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+ <section style="padding: 60px 0; text-align: center; background-color: #f8f9fa;">
+  <a href="library.html" 
+     style="display: inline-block; 
+            background: linear-gradient(135deg, #007bff, #0056b3); 
+            color: #fff; 
+            font-size: 1.2em; 
+            font-weight: bold; 
+            padding: 15px 40px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+            transition: all 0.3s ease;">
+    Library
+  </a>
+</section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Developed & Maintained by <span class="developer">2K Solutions, Jamkhandi (2K Group of Businesses) </span></p>
+    <p>Services:<span class="client">Software Development , Training , Placement </span></p>
+    <p>© 2025 All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Scroll Animation
+    const sections = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+    sections.forEach(sec => observer.observe(sec));
+  </script>
+</body>
+</html>
